@@ -54,13 +54,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Car.cs" />
     <Compile Include="ElectricBasedVehicles.cs" />
-    <Compile Include="ElectricCar.cs" />
-    <Compile Include="ElectricMotorcycle.cs" />
-    <Compile Include="FuelBasedCar.cs" />
-    <Compile Include="FuelBasedMotorcycle.cs" />
+    <Compile Include="EnergySource.cs" />
     <Compile Include="FuelBasedVehicles.cs" />
     <Compile Include="Garage.cs" />
+    <Compile Include="Motorcycle.cs" />
     <Compile Include="Tires.cs" />
     <Compile Include="Truck.cs" />
     <Compile Include="ValueOutOfRangeException.cs" />

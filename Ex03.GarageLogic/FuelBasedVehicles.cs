@@ -6,18 +6,42 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class FuelBasedVehicles : Vehicles
+    public class FuelBasedVehicles : EnergySource
     {
-        protected eFuelType m_FuelType;
-        float m_CurrentAmountOfFuel;
-        protected float m_MaxAmountOfFuel;
-        
+        private readonly eFuelType r_FuelType;
 
-        public static void Refueling(i_HowMuchFuelToAdd)
+        public FuelBasedVehicles(float r_MaxEnergy, float m_CurrentEnergy, eFuelType i_FuelType)
+            : base(r_MaxEnergy, m_CurrentEnergy)
         {
-
+            r_FuelType = i_FuelType;
         }
 
+        public eFuelType FuelType
+        {
+            get
+            {
+                return r_FuelType;
+            }
+        }
+
+        internal void Refueling(float i_HowMuchFuelToAdd, eFuelType i_FuelType)
+        {
+            if (r_FuelType != i_FuelType)
+            {
+                throw new ArgumentException();
+            }
+            else
+            {
+                if (CurrentEnergy + i_HowMuchFuelToAdd <= MaxEnergy && i_HowMuchFuelToAdd > 0)
+                {
+                    CurrentEnergy += i_HowMuchFuelToAdd;
+                }
+                else
+                {
+                    throw new ValueOutOfRangeException(0, MaxEnergy - CurrentEnergy);
+                }
+            }
+        }
         public enum eFuelType
         {
             Soler,
