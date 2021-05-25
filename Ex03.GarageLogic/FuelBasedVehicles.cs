@@ -6,42 +6,50 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class FuelBasedVehicles : EnergySource
+    class FuelBasedVehicles : Vehicle
     {
-        private readonly eFuelType r_FuelType;
+        protected eFuelType m_FuelType;
+        protected float m_MaxFuel;
+        protected float m_CurrentFuel;
 
-        public FuelBasedVehicles(float r_MaxEnergy, float m_CurrentEnergy, eFuelType i_FuelType)
-            : base(r_MaxEnergy, m_CurrentEnergy)
+        internal void Refuel(float i_HowMuchFuelToAdd, eFuelType i_FuelType)
         {
-            r_FuelType = i_FuelType;
-        }
 
-        public eFuelType FuelType
-        {
-            get
-            {
-                return r_FuelType;
-            }
-        }
-
-        internal void Refueling(float i_HowMuchFuelToAdd, eFuelType i_FuelType)
-        {
-            if (r_FuelType != i_FuelType)
+            if (m_FuelType != i_FuelType)
             {
                 throw new ArgumentException();
             }
             else
             {
-                if (CurrentEnergy + i_HowMuchFuelToAdd <= MaxEnergy && i_HowMuchFuelToAdd > 0)
+                if (i_HowMuchFuelToAdd + m_CurrentFuel > m_MaxFuel)
                 {
-                    CurrentEnergy += i_HowMuchFuelToAdd;
+                    throw new ValueOutOfRangeException(0, m_MaxFuel - m_CurrentFuel);
+
                 }
-                else
+                else 
                 {
-                    throw new ValueOutOfRangeException(0, MaxEnergy - CurrentEnergy);
+                    m_CurrentFuel += i_HowMuchFuelToAdd;
                 }
             }
         }
+
+        public float CurrentFuel
+        {
+            get
+            {
+                return m_CurrentFuel;
+            }
+            set
+            {
+                m_CurrentFuel = value;
+            }
+        }
+
+        public override string ToString()
+        {
+            return string.Format(@"The current {0} fuel's amount : [{1}/{2}]", m_FuelType, m_CurrentFuel, m_MaxFuel);
+        }
+
         public enum eFuelType
         {
             Soler,

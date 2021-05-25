@@ -12,9 +12,9 @@ namespace Ex03.GarageLogic
         string m_VehicleOwnerPhone;
         enum m_VehicleStatus;
 
-        public static void AddNewVehicle(Vehicles i_NewVehicle)
+        public static void AddNewVehicle(Vehicle i_NewVehicle)
         {
-
+            new Vehicle = new Vehicles(i_NewVehicle);
         }
 
         public static void ListOfLicensingNumberOfTheVehicleInTheGarage()

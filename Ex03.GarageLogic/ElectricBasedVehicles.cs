@@ -6,24 +6,43 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class ElectricBasedVehicles : EnergySource
+    class ElectricBasedVehicles : Vehicle
     {
-        public ElectricBasedVehicles(float i_MaxEnergy, float i_CurrentEnergy)
-        : base(i_MaxEnergy, i_CurrentEnergy)
+        protected float m_RemainingTimeOfEngine;
+        protected float m_MaxTimeOfEngine;
+
+        public ElectricBasedVehicles()
         {
+        }
+
+        public float RemainingTimeOfEngine
+        {
+            get
+            {
+                return m_RemainingTimeOfEngine;
+            }
+            set
+            {
+                m_RemainingTimeOfEngine = value;
+            }
         }
 
         internal void Recharge(float i_HowManyMoreHoursToAdd)
         {
 
-            if ((CurrentEnergy + i_HowManyMoreHoursToAdd <= MaxEnergy) && (i_HowManyMoreHoursToAdd > 0))
+            if (i_HowManyMoreHoursToAdd + m_RemainingTimeOfEngine > m_MaxTimeOfEngine)
             {
-                CurrentEnergy += i_HowManyMoreHoursToAdd;
+                throw new ValueOutOfRangeException(0, m_MaxTimeOfEngine - m_RemainingTimeOfEngine);
             }
             else
             {
-                throw new ValueOutOfRangeException(0, MaxEnergy - CurrentEnergy);
+                m_RemainingTimeOfEngine += i_HowManyMoreHoursToAdd;
             }
+        }
+
+        public override string ToString()
+        {
+            return string.Format(@"The current battery's amount : [{0}/{1}]", m_RemainingTimeOfEngine, m_MaxTimeOfEngine);
         }
     }
 }
