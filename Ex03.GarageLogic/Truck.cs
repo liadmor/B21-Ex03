@@ -8,14 +8,17 @@ namespace Ex03.GarageLogic
 {
     class Truck : FuelBasedVehicles
     {
-        bool m_IsContainDangerouSsubstance;
-        float m_MaxCarryingWeight;
+        private bool m_IsContainDangerouSsubstance;
+        private float m_MaxCarryingWeight;
+        private const eFuelType m_FuelType = eFuelType.Soler;
+        private const int m_NumberOfTirs = 16;
+        private const float m_MaxTank = 120f;
+        private const int m_MaxPrashore = 26;
 
-        public Truck()
+
+        public Truck() : 
+            base(m_FuelType, m_NumberOfTirs, m_MaxPrashore, m_MaxTank)
         {
-            m_FuelType = eFuelType.Soler;
-            m_Tire = new List<Tires>(16);
-            m_MaxFuel = 120f;
         }
 
         public bool IsContainDangerouSsubstance

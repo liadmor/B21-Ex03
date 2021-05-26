@@ -8,22 +8,30 @@ namespace Ex03.GarageLogic
 {
     class FuelBasedVehicles : Vehicle
     {
-        protected eFuelType m_FuelType;
-        protected float m_MaxFuel;
+        protected eFuelType m_VehicleFuelType;
+        protected float m_VehichleMaxTank;
         protected float m_CurrentFuel;
+
+        public FuelBasedVehicles(eFuelType i_FuelType, int i_NumberOfTires, int i_MaxPrashore, float i_MaxEnergiSource) :
+            base(i_NumberOfTires, i_MaxPrashore, i_MaxEnergiSource)
+        {
+            m_VehicleFuelType = i_FuelType;
+            m_VehichleMaxTank = i_MaxEnergiSource;
+            m_CurrentFuel = 0;
+        }
 
         internal void Refuel(float i_HowMuchFuelToAdd, eFuelType i_FuelType)
         {
 
-            if (m_FuelType != i_FuelType)
+            if (m_VehicleFuelType != i_FuelType)
             {
                 throw new ArgumentException();
             }
             else
             {
-                if (i_HowMuchFuelToAdd + m_CurrentFuel > m_MaxFuel)
+                if (i_HowMuchFuelToAdd + m_CurrentFuel > m_VehichleMaxTank)
                 {
-                    throw new ValueOutOfRangeException(0, m_MaxFuel - m_CurrentFuel);
+                    throw new ValueOutOfRangeException(0, m_VehichleMaxTank - m_CurrentFuel);
 
                 }
                 else 
@@ -47,7 +55,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format(@"The current {0} fuel's amount : [{1}/{2}]", m_FuelType, m_CurrentFuel, m_MaxFuel);
+            return string.Format(@"The current {0} fuel's amount : [{1}/{2}]", m_VehicleFuelType, m_CurrentFuel, m_VehichleMaxTank);
         }
 
         public enum eFuelType

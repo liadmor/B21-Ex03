@@ -10,11 +10,13 @@ namespace Ex03.GarageLogic
     {
         Motorcycle.eLicenseType m_LicenseType;
         int m_EngineCapacity;
+        private const int m_NumberOfTirs = 2;
+        private const float m_MaxEngine = 1.8f;
+        private const int m_MaxPrashore = 30;
 
-        public ElectricMotorcycle()
+        public ElectricMotorcycle() :
+            base(m_NumberOfTirs, m_MaxPrashore, m_MaxEngine, m_MaxEngine)
         {
-            m_Tire = new List<Tires>(2);
-            m_MaxTimeOfEngine = 1.8f;
         }
 
         public Motorcycle.eLicenseType LicenseType

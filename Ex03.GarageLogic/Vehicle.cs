@@ -12,10 +12,13 @@ namespace Ex03.GarageLogic
         string m_LicensingNumber;
         protected float m_EnergyPrecent;
         protected List<Tires> m_Tire;
-        //int m_NumberOfTires;
+        //liad
+        int m_NumberOfTires;
+        int m_MaxPrashore;
+        float m_MaxEnergiSource;
+        //liad
 
-
-        public Vehicle()
+        public Vehicle(int i_NumberOfTires, int i_MaxPrashore, float i_MaxEnergiSource)
         {
             
         }

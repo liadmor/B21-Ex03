@@ -10,12 +10,15 @@ namespace Ex03.GarageLogic
     {
         Motorcycle.eLicenseType m_LicenseType;
         int m_EngineCapacity;
+        private const eFuelType m_FuelType = eFuelType.Octan98;
+        private const int m_NumberOfTirs = 2;
+        private const float m_MaxTank = 6f;
+        private const int m_MaxPrashore = 30;
 
-        public FuelBasedMotorcycle()
+        public FuelBasedMotorcycle() : 
+            base(m_FuelType, m_NumberOfTirs, m_MaxPrashore, m_MaxTank)
         {
-            m_FuelType = eFuelType.Octan98;
-            m_Tire = new List<Tires>(2);
-            m_MaxFuel = 6f;
+
         }
 
         public Motorcycle.eLicenseType LicenseType

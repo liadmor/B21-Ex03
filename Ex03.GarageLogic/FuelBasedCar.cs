@@ -10,12 +10,14 @@ namespace Ex03.GarageLogic
     {
         Car.eColor m_color;
         Car.eNunDoors m_numDoors;
-        
-        public FuelBasedCar()
+        private const eFuelType m_FuelType = eFuelType.Octan95;
+        private const int m_NumberOfTirs = 4;
+        private const float m_MaxTank = 45f;
+        private const int m_MaxPrashore = 32;
+
+        public FuelBasedCar() : 
+            base(m_FuelType, m_NumberOfTirs, m_MaxPrashore, m_MaxTank)
         {
-            m_FuelType = eFuelType.Octan95;
-            m_Tire = new List<Tires>(4);
-            m_MaxFuel = 45f;
         }
        
         public Car.eColor Color

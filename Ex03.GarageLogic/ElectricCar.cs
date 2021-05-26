@@ -10,11 +10,13 @@ namespace Ex03.GarageLogic
     {
         Car.eColor m_color;
         Car.eNunDoors m_numDoors;
+        private const int m_NumberOfTirs = 4;
+        private const float m_MaxEngine = 3.2f;
+        private const int m_MaxPrashore = 32;
 
-        public ElectricCar()
+        public ElectricCar () : 
+            base
         {
-            m_MaxTimeOfEngine = 3.2f;
-            m_Tire = new List<Tires>(4);
         }
 
         public Car.eColor Color

@@ -11,8 +11,11 @@ namespace Ex03.GarageLogic
         protected float m_RemainingTimeOfEngine;
         protected float m_MaxTimeOfEngine;
 
-        public ElectricBasedVehicles()
+        public ElectricBasedVehicles(int i_NumberOfTires, int i_MaxPrashore, float i_MaxEnergiSource, float m_MaxTimeOfEngine) : 
+            base(i_NumberOfTires, i_MaxPrashore, i_MaxEnergiSource)
         {
+            m_MaxTimeOfEngine = i_MaxEnergiSource;
+            m_RemainingTimeOfEngine = m_MaxTimeOfEngine;
         }
 
         public float RemainingTimeOfEngine
