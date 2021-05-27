@@ -14,8 +14,8 @@ namespace Ex03.GarageLogic
         private const float m_MaxEngine = 3.2f;
         private const int m_MaxPrashore = 32;
 
-        public ElectricCar () : 
-            base
+        public ElectricCar () :
+            base(m_NumberOfTirs, m_MaxPrashore, m_MaxEngine)
         {
         }
 

@@ -59,6 +59,7 @@
     <Compile Include="ElectricCar.cs" />
     <Compile Include="ElectricMotorcycle.cs" />
     <Compile Include="EnergySource.cs" />
+    <Compile Include="Factory.cs" />
     <Compile Include="FuelBasedCar.cs" />
     <Compile Include="FuelBasedMotorcycle.cs" />
     <Compile Include="FuelBasedVehicles.cs" />

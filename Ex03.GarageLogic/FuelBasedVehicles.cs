@@ -17,10 +17,10 @@ namespace Ex03.GarageLogic
         {
             m_VehicleFuelType = i_FuelType;
             m_VehichleMaxTank = i_MaxEnergiSource;
-            m_CurrentFuel = 0;
+            m_CurrentFuel = m_CurrentEnergySource;
         }
 
-        internal void Refuel(float i_HowMuchFuelToAdd, eFuelType i_FuelType)
+        public void Refuel(float i_HowMuchFuelToAdd, eFuelType i_FuelType)
         {
 
             if (m_VehicleFuelType != i_FuelType)
