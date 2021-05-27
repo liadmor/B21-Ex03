@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class FuelBasedVehicles : Vehicle
+    public class FuelBasedVehicles : Vehicle
     {
         protected eFuelType m_VehicleFuelType;
         protected float m_VehichleMaxTank;
@@ -19,6 +19,21 @@ namespace Ex03.GarageLogic
             m_VehichleMaxTank = i_MaxEnergiSource;
             m_CurrentFuel = m_CurrentEnergySource;
         }
+
+        public eFuelType VehicleFuelType
+        {
+            get
+            {
+                return m_VehicleFuelType;
+            }
+            set
+            {
+                m_VehicleFuelType = value;
+            }
+            
+        }
+
+
 
         public void Refuel(float i_HowMuchFuelToAdd, eFuelType i_FuelType)
         {

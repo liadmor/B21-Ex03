@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class ElectricBasedVehicles : Vehicle
+    public class ElectricBasedVehicles : Vehicle
     {
         protected float m_RemainingTimeOfEngine;
         protected float m_MaxTimeOfEngine;

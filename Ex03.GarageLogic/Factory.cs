@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class Factory
+    public class Factory
     {
-        private Vehicle m_NewVehicle;
+        public Vehicle m_NewVehicle;
+        private ePossibleVehicles m_VehicleType;
         public enum ePossibleVehicles
         {
             ElectricBasedMotorcycle = 1,
@@ -18,11 +19,11 @@ namespace Ex03.GarageLogic
             Truck
         }
 
-        public static Vehicle NewVehicle(ePossibleVehicles i_VehicleType)
+        public void NewVehicle(ePossibleVehicles i_VehicleType)
         {
-            //Vehicle vehicle = null;
+            m_VehicleType = i_VehicleType;
 
-            switch (i_VehicleType)
+            switch (m_VehicleType)
             {
                 case ePossibleVehicles.ElectricBasedCar:
                     m_NewVehicle = new ElectricCar();
@@ -43,13 +44,10 @@ namespace Ex03.GarageLogic
                 case ePossibleVehicles.Truck:
                     m_NewVehicle = new Truck();
                     break;
-
             }
-
-            return vehicle;
         }
 
-        public void 
+        public 
 
     }
 }

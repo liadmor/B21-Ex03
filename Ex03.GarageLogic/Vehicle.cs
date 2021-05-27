@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    abstract class Vehicle
+    public class Vehicle
     {
         string m_ModelName;
         string m_LicensingNumber;
@@ -23,6 +23,20 @@ namespace Ex03.GarageLogic
             m_NumberOfTires = i_NumberOfTires;
             m_MaxEnergySource = i_MaxEnergySource;
             m_Tire = new List<Tires>(m_NumberOfTires);
+        }
+
+
+        public List<Tires> Tire
+        {
+            get
+            {
+                return m_Tire;
+            }
+            set
+            {
+                m_Tire = value;
+            }
+
         }
 
 
@@ -93,7 +107,7 @@ namespace Ex03.GarageLogic
                                                             License Number: {0}
                                                             Model Name: {1}
                                                             Energy Percentage Left: {2}%
-                                                            {4}",
+                                                            {3}",
                                                             m_LicensingNumber,
                                                             m_ModelName,
                                                             m_EnergyPrecent,

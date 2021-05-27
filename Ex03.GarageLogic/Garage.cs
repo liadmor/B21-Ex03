@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class Garage
+    public class Garage
     {
         private Dictionary<string, OwnerInformation> m_VehiclesInTheGarage;
 
@@ -76,9 +76,9 @@ namespace Ex03.GarageLogic
 
         public void InflateTiresToMax(string i_licensingNumber)
         {
-            foreach (Tires tire in VehicleInTheGarage[i_licensingNumber].Vehicle.TiresList)
+            foreach (Tires tire in VehicleInTheGarage[i_licensingNumber].Vehicle.Tire)
             {
-                tire.Inflatoin(tire.m_MaxAirPressure - tire.m_CurrentAirPressure);
+                tire.Inflatoin(tire.MaxAirPressure - tire.CurrentAirPressure);
             }
         }
 
@@ -118,6 +118,10 @@ namespace Ex03.GarageLogic
                 {
                     return m_VehicleOwnerName;
                 }
+                set
+                {
+                    m_VehicleOwnerName = value;
+                }
             }
 
             public string OwnerPhoneNumber
@@ -125,6 +129,10 @@ namespace Ex03.GarageLogic
                 get
                 {
                     return m_VehicleOwnerPhone;
+                }
+                set
+                {
+                    m_VehicleOwnerPhone = value;
                 }
             }
 

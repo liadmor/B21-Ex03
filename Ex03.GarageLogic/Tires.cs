@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class Tires
+    public class Tires
     {
         private string m_ManufacturerName;
-        public float m_MaxAirPressure;
+        private float m_MaxAirPressure;
         private float m_CurrentAirPressure;
 
         public Tires(string i_ManufacturerName, float i_MaxAirPressure, float i_CurrentAirPressure)
@@ -55,7 +55,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void Inflatoin(int i_AirPressiroToAdd)
+        public void Inflatoin(float i_AirPressiroToAdd)
         {
             if (CurrentAirPressure + i_AirPressiroToAdd <= MaxAirPressure)
             {
