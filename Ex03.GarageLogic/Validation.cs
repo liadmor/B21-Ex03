@@ -172,13 +172,23 @@ namespace Ex03.GarageLogic
             return isValidInput;
         }
 
-        public static bool CheckColorCar(int i_DoorsNumber)
+        public static bool CheckColorCar(String i_DoorsNumber)
         {
             bool isValidInput = true;
+            int parseInput;
 
-            if ((i_DoorsNumber > 4) || (i_DoorsNumber < 1))
+            try
             {
-                Console.WriteLine("You have enter number that does not have represention, please enter again:");
+                parseInput =int.Parse(i_DoorsNumber);
+                if ((parseInput > 4) || (parseInput < 1))
+                {
+                    Console.WriteLine("You have enter number that does not have represention, please enter again:");
+                    isValidInput = false;
+                }
+            }
+            catch
+            {
+                Console.WriteLine("You didnt enter a invalid input, please enter again:");
                 isValidInput = false;
             }
 

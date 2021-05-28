@@ -66,6 +66,21 @@ namespace Ex03.GarageLogic
             return vehicleListInTheGarage;
         }
 
+        public bool IsInGarege(string  i_LicanseNumber)
+        {
+            bool IsExist = false;
+
+            foreach (KeyValuePair<string, OwnerInformation> vehicle in VehicleInTheGarage)
+            {
+                if (vehicle.Key == i_LicanseNumber)
+                {
+                    IsExist = true;
+                }
+            }
+
+            return IsExist;
+        }
+
         public void ChangeStatusVehicle(string i_licensingNumber, OwnerInformation.eVehicleStatus i_NewStatus)
         {
             if (i_NewStatus != VehicleInTheGarage[i_licensingNumber].VehicleStatus)
@@ -89,7 +104,8 @@ namespace Ex03.GarageLogic
 
         public void ChargeAnElectricBasedVehicle(string i_licensingNumber, float i_NumberOfMinutesToCharge)
         {
-            (VehicleInTheGarage[i_licensingNumber].Vehicle as ElectricBasedVehicles).Recharge(i_NumberOfMinutesToCharge);
+            ElectricBasedVehicles vehicle = (VehicleInTheGarage[i_licensingNumber].Vehicle as ElectricBasedVehicles);
+            vehicle.Recharge(i_NumberOfMinutesToCharge);
         }
 
         public string DisplayVehicleInformation(string i_licensingNumber)

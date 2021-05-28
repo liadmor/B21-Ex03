@@ -212,9 +212,22 @@ namespace Ex03.ConsoleUI
 
             int newStatus = int.Parse(Console.ReadLine());
             string VihecleLicense = getLicenseNumberFromUser();
-            r_NewGarage.ChangeStatusVehicle(VihecleLicense, (Garage.OwnerInformation.eVehicleStatus)newStatus);
-        }
+            if (IsTheLicenseInGarege(VihecleLicense))
+            {
+                r_NewGarage.ChangeStatusVehicle(VihecleLicense, (Garage.OwnerInformation.eVehicleStatus)newStatus);
 
+            }
+            else
+            {
+                Console.WriteLine("The license number is not in the garage");
+                PressEnterToMainMenu();
+            }
+        }
+        private bool IsTheLicenseInGarege( string i_LicenseNumber)
+        {
+            return r_NewGarage.IsInGarege(i_LicenseNumber);
+
+        }
         private void InflateTiresToMax()
         {
             string VihecleLicense = getLicenseNumberFromUser();
@@ -234,9 +247,38 @@ namespace Ex03.ConsoleUI
         {
             string VihecleLicense = getLicenseNumberFromUser();
             Console.WriteLine("Please enter the amount to fill");
-            float AmountToFill = float.Parse(Console.ReadLine());
+            String amountToFillInput = Console.ReadLine();
+            if (!ValidInputFloat(amountToFillInput) || IsTheLicenseInGarege(VihecleLicense))
+            {
+                PressEnterToMainMenu();
+            }
+            else
+            {
+                float AmountToFill = float.Parse(Console.ReadLine());
+
+                r_NewGarage.ChargeAnElectricBasedVehicle(VihecleLicense, AmountToFill);
+
+            }
+
             //TODO - check if the amount to fill is biger than the max
-            r_NewGarage.ChargeAnElectricBasedVehicle(VihecleLicense, AmountToFill);
+        }
+
+        private bool ValidInputFloat(string i_input)
+        {
+            bool ans = true;
+            float parseInput;
+
+            try
+            {
+                parseInput = float.Parse(i_input);
+            }
+            catch
+            {
+                Console.WriteLine("The input is invalid");
+                ans = false;
+            }
+
+            return ans;
         }
 
         private void ShowVehicleInformation()
@@ -302,6 +344,7 @@ namespace Ex03.ConsoleUI
         private void GetLicenseTypeFromUser(Vehicle i_newVehicle)
         {
             int licenseType;
+            string licenseTypeInput;
             bool isValidLicenseType;
 
             Console.Write(@"Please enter the license type - choose an option: 
@@ -312,11 +355,12 @@ namespace Ex03.ConsoleUI
 
             do
             {
-                licenseType = int.Parse(Console.ReadLine());
-                isValidLicenseType = GarageLogic.Validation.CheckColorCar(licenseType);
+                licenseTypeInput = Console.ReadLine();
+                isValidLicenseType = GarageLogic.Validation.CheckColorCar(licenseTypeInput);
             }
             while (!isValidLicenseType);
 
+            licenseType = int.Parse(licenseTypeInput);
             if (i_newVehicle is FuelBasedMotorcycle)
             {
                 ((i_newVehicle as FuelBasedVehicles) as FuelBasedMotorcycle).LicenseType = (Motorcycle.eLicenseType)licenseType;
@@ -400,6 +444,7 @@ namespace Ex03.ConsoleUI
         private void GetColorFromUser(Vehicle i_newVehicle)
         {
             int color;
+            String colorInput;
             bool isValidColor;
 
             Console.Write(@"Please enter the car's color: 
@@ -410,10 +455,12 @@ namespace Ex03.ConsoleUI
 
             do
             {
-                color = int.Parse(Console.ReadLine());
-                isValidColor = Validation.CheckColorCar(color);
+                colorInput = Console.ReadLine();
+                isValidColor = Validation.CheckColorCar(colorInput);
             }
             while (!isValidColor);
+
+            color = int.Parse(colorInput);
             if (i_newVehicle is FuelBasedCar)
             {
                 ((i_newVehicle as FuelBasedVehicles) as FuelBasedCar).Color = (Car.eColor)color;
