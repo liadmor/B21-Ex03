@@ -54,7 +54,7 @@ namespace Ex03.ConsoleUI
             while (!exitGarage)
             {
                 presentUserMenu();
-                int getOption = GarageLogic.Validation.ReceiveEnumInput<eGarageMenu>();
+                int getOption = Validation.ReceiveEnumInput<eGarageMenu>();
 
                 if (getOption == k_ExitProgram)
                 {
@@ -98,7 +98,7 @@ namespace Ex03.ConsoleUI
             }
 
             Console.WriteLine("Please select the vehicle type: " + possibleVehiclesToChoose);
-            selectedVehicleType = GarageLogic.Validation.ReceiveEnumInput<Factory.ePossibleVehicles>();
+            selectedVehicleType = Validation.ReceiveEnumInput<Factory.ePossibleVehicles>();
             Vehicle newVehicle = Factory.NewVehicle((Factory.ePossibleVehicles)selectedVehicleType);
             newVehicle.LicensingNumber = i_LicenseNumber;
             newVehicle.VehicleType = (Factory.ePossibleVehicles)selectedVehicleType;
@@ -164,7 +164,6 @@ namespace Ex03.ConsoleUI
             bool isValidInput;
 
             receiveVehicleOwnerInformation(out ownerName, out ownerPhoneNumber);
-            //i_NewVehicle.UpdateProperties(userDialogueInputsList);
             r_NewGarage.AddNewVehicle(ownerName, ownerPhoneNumber, i_NewVehicle);
         }
 
@@ -305,7 +304,7 @@ namespace Ex03.ConsoleUI
             do
             {
                 licenseNumber = Console.ReadLine();
-                isValidLicenseNumber = GarageLogic.Validation.CheckLicenseNumber(licenseNumber);
+                isValidLicenseNumber = Validation.CheckLicenseNumber(licenseNumber);
             }
             while (!isValidLicenseNumber);
 
@@ -356,7 +355,7 @@ namespace Ex03.ConsoleUI
             do
             {
                 licenseTypeInput = Console.ReadLine();
-                isValidLicenseType = GarageLogic.Validation.CheckColorCar(licenseTypeInput);
+                isValidLicenseType = Validation.CheckColorCar(licenseTypeInput);
             }
             while (!isValidLicenseType);
 
