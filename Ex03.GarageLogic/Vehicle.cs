@@ -132,22 +132,33 @@ namespace Ex03.GarageLogic
                 return m_MaxTireAirPressure;
             }
         }
-        public override string ToString()
+        public void PrintCurr()
         {
             /*string vehicleInformationOutput = string.Format(
                                                             @"Vehicle:
                                                             --------------------------------
                                                             License Number: {0}
-                                                            Model Name: {1}
-                                                            Energy Percentage Left: {2}%
-                                                            {3}",
-                                                            m_LicensingNumber,
-                                                            m_ModelName,
-                                                            m_EnergyPrecent,
-                                                            m_Tire[0].ToString());
-
-            return vehicleInformationOutput;*/
-            return "liadddd";
+                                                            Model Name: {1},
+                                                            Current: {2},
+                                                            Energy Percentage Left: {3}%
+                                                            {4}",
+                                                            LicensingNumber,
+                                                            ModelName,
+                                                            CurrentEnergySource,
+                                                            EnergyPrecent,
+                                                            m_Tire[0].ToString());*/
+            Console.WriteLine("Vehicle");
+            Console.WriteLine("License" + LicensingNumber);
+            Console.WriteLine("Model" + ModelName);
+            Console.WriteLine("Current" + CurrentEnergySource);
+            Console.WriteLine("Energy Percentage Left:" + EnergyPrecent);
+            Tire.ToString();
+        }
+        public override string ToString()
+        {
+            
+            PrintCurr();
+            return " ";
         }
     }
 }

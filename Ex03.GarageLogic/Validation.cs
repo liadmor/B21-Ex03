@@ -87,8 +87,15 @@ namespace Ex03.GarageLogic
         public static bool CheckAirPressure(string i_AirPressure)
         {
             float airPressure = 0;
+            bool IsValidAirPressure = true;
 
-            return float.TryParse(i_AirPressure, out airPressure);
+            if (!float.TryParse(i_AirPressure, out airPressure))
+            {
+                Console.WriteLine("invalid text, plesae enter number");
+                IsValidAirPressure = false;
+            }
+
+            return IsValidAirPressure;
         }
 
         public static int ReceiveEnumInput<T>()

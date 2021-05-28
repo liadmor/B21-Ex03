@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
         {
             m_MaxTimeOfEngine = i_MaxEnergiSource;
             //m_RemainingTimeOfEngine = m_CurrentEnergySource;
-            m_RemainingTimeOfEngine = CurrentEnergySource;
+            //m_RemainingTimeOfEngine = CurrentEnergySource;
         }
 
         public float RemainingTimeOfEngine
@@ -30,6 +30,19 @@ namespace Ex03.GarageLogic
                 m_RemainingTimeOfEngine = value;
             }
         }
+
+        public float MaxTimeOfEngine
+        {
+            get
+            {
+                return m_MaxTimeOfEngine;
+            }
+            set
+            {
+                m_MaxTimeOfEngine = value;
+            }
+        }
+
 
         internal void Recharge(float i_HowManyMoreHoursToAdd)
         {
@@ -49,8 +62,9 @@ namespace Ex03.GarageLogic
             string stringInformationElectricBaseVehicle;
 
             stringInformationElectricBaseVehicle = string.Format(
-                                                  @"this vehicle based on Electric{0}
-                                                  the current fuel is: [{1}/{2}]", base.ToString(), m_RemainingTimeOfEngine, m_MaxTimeOfEngine);
+                                                  @"this vehicle based on Electric
+                                                  the current engin is: [{0}/{1}]
+                                                  {2}", RemainingTimeOfEngine, MaxTimeOfEngine ,base.ToString());
             return stringInformationElectricBaseVehicle;
         }
 
