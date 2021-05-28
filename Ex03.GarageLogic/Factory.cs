@@ -8,8 +8,7 @@ namespace Ex03.GarageLogic
 {
     public class Factory
     {
-        public Vehicle m_NewVehicle;
-        private ePossibleVehicles m_VehicleType;
+    
         public enum ePossibleVehicles
         {
             ElectricBasedMotorcycle = 1,
@@ -19,35 +18,34 @@ namespace Ex03.GarageLogic
             Truck
         }
 
-        public void NewVehicle(ePossibleVehicles i_VehicleType)
+        public static Vehicle NewVehicle(ePossibleVehicles i_VehicleType)
         {
-            m_VehicleType = i_VehicleType;
+            Vehicle newVehicle = null;
 
-            switch (m_VehicleType)
+            switch (i_VehicleType)
             {
                 case ePossibleVehicles.ElectricBasedCar:
-                    m_NewVehicle = new ElectricCar();
+                    newVehicle = new ElectricCar();
                     break;
 
                 case ePossibleVehicles.FuelBaseCar:
-                    m_NewVehicle = new FuelBasedCar();
+                    newVehicle = new FuelBasedCar();
                     break;
 
                 case ePossibleVehicles.FuelBasedMotorcycle:
-                    m_NewVehicle = new FuelBasedMotorcycle();
+                    newVehicle = new FuelBasedMotorcycle();
                     break;
 
                 case ePossibleVehicles.ElectricBasedMotorcycle:
-                    m_NewVehicle = new ElectricMotorcycle();
+                    newVehicle = new ElectricMotorcycle();
                     break;
 
                 case ePossibleVehicles.Truck:
-                    m_NewVehicle = new Truck();
+                    newVehicle = new Truck();
                     break;
             }
+
+            return newVehicle;
         }
-
-        public 
-
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class ElectricCar : ElectricBasedVehicles
+    public class ElectricCar : ElectricBasedVehicles
     {
         Car.eColor m_color;
         Car.eNunDoors m_numDoors;
@@ -40,6 +40,17 @@ namespace Ex03.GarageLogic
             {
                 m_numDoors = value;
             }
+        }
+
+        public override string ToString()
+        {
+            string stringInformationElectricCar;
+
+            stringInformationElectricCar = string.Format(
+                                                  @"This is electric car {0},
+                                                  color: {1}
+                                                  number of doors: {2}", base.ToString(), m_color, m_numDoors);
+            return stringInformationElectricCar;
         }
     }
 }

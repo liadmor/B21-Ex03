@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class FuelBasedCar : FuelBasedVehicles
+    public class FuelBasedCar : FuelBasedVehicles
     {
         Car.eColor m_color;
         Car.eNunDoors m_numDoors;
@@ -45,8 +45,14 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("The car is {0} and has {1} doors", NumberOfDoors, Color);
-        }
+            string stringInformationFuelCar;
 
+            stringInformationFuelCar = string.Format(
+                                                  @"This is Fuel base car {0},
+                                                  color: {1}
+                                                  number of doors: {2}
+                                                  Fuel Type: {3}", base.ToString(), m_color, m_numDoors, m_FuelType);
+            return stringInformationFuelCar;
+        }
     }
 }

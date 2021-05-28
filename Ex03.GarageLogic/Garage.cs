@@ -97,6 +97,7 @@ namespace Ex03.GarageLogic
             return VehicleInTheGarage[i_licensingNumber].ToString();
         }
 
+
         public class OwnerInformation
         {
             string m_VehicleOwnerName;

@@ -15,7 +15,8 @@ namespace Ex03.GarageLogic
             base(i_NumberOfTires, i_MaxPrashore, i_MaxEnergiSource)
         {
             m_MaxTimeOfEngine = i_MaxEnergiSource;
-            m_RemainingTimeOfEngine = m_CurrentEnergySource;
+            //m_RemainingTimeOfEngine = m_CurrentEnergySource;
+            m_RemainingTimeOfEngine = CurrentEnergySource;
         }
 
         public float RemainingTimeOfEngine
@@ -45,7 +46,14 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format(@"The current battery's amount : [{0}/{1}]", m_RemainingTimeOfEngine, m_MaxTimeOfEngine);
+            string stringInformationElectricBaseVehicle;
+
+            stringInformationElectricBaseVehicle = string.Format(
+                                                  @"this vehicle based on Electric{0}
+                                                  the current fuel is: [{1}/{2}]", base.ToString(), m_RemainingTimeOfEngine, m_MaxTimeOfEngine);
+            return stringInformationElectricBaseVehicle;
         }
+
+
     }
 }

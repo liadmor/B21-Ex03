@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class FuelBasedMotorcycle : FuelBasedVehicles
+    public class FuelBasedMotorcycle : FuelBasedVehicles
     {
         Motorcycle.eLicenseType m_LicenseType;
         int m_EngineCapacity;
@@ -43,6 +43,18 @@ namespace Ex03.GarageLogic
             {
                 m_EngineCapacity = value;
             }
+        }
+
+        public override string ToString()
+        {
+            string stringInformationFuelBasedMotorcycle;
+
+            stringInformationFuelBasedMotorcycle = string.Format(
+                                                  @"This is Fuel Based Motorcycle {0},
+                                                  License Type: {1}
+                                                  Engine Capacity: {2}
+                                                  Fuel Type = {3}", base.ToString(), m_LicenseType, m_EngineCapacity, m_FuelType);
+            return stringInformationFuelBasedMotorcycle;
         }
     }
 }

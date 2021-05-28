@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class ElectricMotorcycle : ElectricBasedVehicles
+    public class ElectricMotorcycle : ElectricBasedVehicles
     {
         Motorcycle.eLicenseType m_LicenseType;
         int m_EngineCapacity;
@@ -15,7 +15,7 @@ namespace Ex03.GarageLogic
         private const int m_MaxPrashore = 30;
 
         public ElectricMotorcycle() :
-            base(m_NumberOfTirs, m_MaxPrashore, m_MaxEngine, m_MaxEngine)
+            base(m_NumberOfTirs, m_MaxPrashore, m_MaxEngine)
         {
         }
 
@@ -41,6 +41,17 @@ namespace Ex03.GarageLogic
             {
                 m_EngineCapacity = value;
             }
+        }
+
+        public override string ToString()
+        {
+            string stringInformationElectricMotorcycle;
+
+            stringInformationElectricMotorcycle = string.Format(
+                                                  @"This is electric Motorcycle {0},
+                                                  License Type: {1}
+                                                  Engine Capacity: {2}", base.ToString(), m_LicenseType, m_EngineCapacity);
+            return stringInformationElectricMotorcycle;
         }
 
     }

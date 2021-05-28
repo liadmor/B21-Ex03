@@ -12,7 +12,7 @@ namespace Ex03.GarageLogic
         string m_LicensingNumber;
         protected float m_EnergyPrecent;
         protected List<Tires> m_Tire;
-
+        Factory.ePossibleVehicles m_VehicleType;
         int m_NumberOfTires;
         int m_MaxTireAirPressure;
         float m_MaxEnergySource;
@@ -20,9 +20,23 @@ namespace Ex03.GarageLogic
 
         public Vehicle(int i_NumberOfTires, int i_MaxTireAirPressure, float i_MaxEnergySource)
         {
+
             m_NumberOfTires = i_NumberOfTires;
             m_MaxEnergySource = i_MaxEnergySource;
+            m_MaxTireAirPressure = i_MaxTireAirPressure;
             m_Tire = new List<Tires>(m_NumberOfTires);
+        }
+
+        public Factory.ePossibleVehicles VehicleType
+        {
+            get
+            {
+                return m_VehicleType;
+            }
+            set
+            {
+                m_VehicleType = value;
+            }
         }
 
 
@@ -37,6 +51,18 @@ namespace Ex03.GarageLogic
                 m_Tire = value;
             }
 
+        }
+
+        public float MaxEnergySource
+        {
+            get
+            {
+                return m_MaxEnergySource;
+            }
+            set
+            {
+                m_MaxEnergySource = value;
+            }
         }
 
 
@@ -99,9 +125,16 @@ namespace Ex03.GarageLogic
             }
         }
 
-        protected string VehicleToString()
+        public int MaxTireAirPressure
         {
-            string vehicleInformationOutput = string.Format(
+            get
+            {
+                return m_MaxTireAirPressure;
+            }
+        }
+        public override string ToString()
+        {
+            /*string vehicleInformationOutput = string.Format(
                                                             @"Vehicle:
                                                             --------------------------------
                                                             License Number: {0}
@@ -113,7 +146,8 @@ namespace Ex03.GarageLogic
                                                             m_EnergyPrecent,
                                                             m_Tire[0].ToString());
 
-            return vehicleInformationOutput;
+            return vehicleInformationOutput;*/
+            return "liadddd";
         }
     }
 }

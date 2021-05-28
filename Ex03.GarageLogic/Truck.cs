@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    class Truck : FuelBasedVehicles
+    public class Truck : FuelBasedVehicles
     {
         private bool m_IsContainDangerouSsubstance;
         private float m_MaxCarryingWeight;
@@ -43,6 +43,18 @@ namespace Ex03.GarageLogic
             {
                 m_MaxCarryingWeight = value;
             }
+        }
+
+        public override string ToString()
+        {
+            string stringInformationTruck;
+            
+            stringInformationTruck = string.Format(
+                                                  @"This is Truck {0},
+                                                  Fuel Type: {1}
+                                                  Is Contain Dangerou Ssubstance: {2}
+                                                  Max Carrying Weight: {3}", base.ToString(), m_FuelType, m_IsContainDangerouSsubstance, m_MaxCarryingWeight);
+            return stringInformationTruck;
         }
     }
 }

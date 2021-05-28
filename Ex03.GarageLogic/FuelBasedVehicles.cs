@@ -70,7 +70,12 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format(@"The current {0} fuel's amount : [{1}/{2}]", m_VehicleFuelType, m_CurrentFuel, m_VehichleMaxTank);
+            string stringInformationFuelBaseVehicle;
+
+            stringInformationFuelBaseVehicle = string.Format(
+                                                  @"this vehicle based on Fuel{0}
+                                                  the current fuel is: [{1}/{2}]", base.ToString(), m_CurrentFuel, m_VehichleMaxTank);
+            return stringInformationFuelBaseVehicle;
         }
 
         public enum eFuelType
