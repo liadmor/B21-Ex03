@@ -162,7 +162,6 @@ namespace Ex03.ConsoleUI
         private void addNewVehicleToGarage(Vehicle i_NewVehicle)
         {
             string ownerName, ownerPhoneNumber;
-            bool isValidInput;
 
             receiveVehicleOwnerInformation(out ownerName, out ownerPhoneNumber);
             Console.WriteLine(r_NewGarage.AddNewVehicle(ownerName, ownerPhoneNumber, i_NewVehicle));
@@ -191,11 +190,11 @@ namespace Ex03.ConsoleUI
                                         1   InRepaired
                                         2   Repaired
                                         3   Paid");
-            //TODO change the TOstring;
+
             int filterLicense = int.Parse(Console.ReadLine());
             StringBuilder licenseNumbersString = new StringBuilder();
             List<string> ListLicenseNumbers = r_NewGarage.ListOfLicensingNumberOfTheVehicleInTheGarageByStatus((Garage.OwnerInformation.eVehicleStatus)filterLicense);
-            licenseNumbersString.AppendFormat("The license number in the gerage that {0}", (Garage.OwnerInformation.eVehicleStatus)filterLicense);
+            licenseNumbersString.AppendFormat("The license number in the gerage that {0}: {1}", (Garage.OwnerInformation.eVehicleStatus)filterLicense, Environment.NewLine());
             foreach (string licenseNumber in ListLicenseNumbers)
             {
                 licenseNumbersString.Append(licenseNumber);
@@ -253,23 +252,22 @@ namespace Ex03.ConsoleUI
         private void ChargeVehicle()
         {
 
-            //TODO ADD DO WHILE ANTIL WE GET VALID INPUT
-            string VihecleLicense = getLicenseNumberFromUser();
-            Console.WriteLine("Please enter the amount to fill");
+            string VihecleLicense;
+
+            do
+            {
+                VihecleLicense = getLicenseNumberFromUser();
+            } while (!IsTheLicenseInGarege(VihecleLicense));
+
+            Console.WriteLine("Please enter the amount to fill, the maximum is " + r_NewGarage.VehicleInTheGarage[VihecleLicense].Vehicle.MaxEnergySource);
             String amountToFillInput = Console.ReadLine();
-            if (!ValidInputFloat(amountToFillInput) || IsTheLicenseInGarege(VihecleLicense))
+            while (!ValidInputFloat(amountToFillInput))
             {
-                PressEnterToMainMenu();
+                Console.WriteLine("Invalid input, Please enter the amount to fill");
+                amountToFillInput = Console.ReadLine();
             }
-            else
-            {
-                float AmountToFill = float.Parse(Console.ReadLine());
-
-                r_NewGarage.ChargeAnElectricBasedVehicle(VihecleLicense, AmountToFill);
-
-            }
-
-            //TODO - check if the amount to fill is biger than the max
+            float AmountToFill = float.Parse(Console.ReadLine());
+            r_NewGarage.ChargeAnElectricBasedVehicle(VihecleLicense, AmountToFill);
         }
 
         private bool ValidInputFloat(string i_input)
@@ -337,7 +335,7 @@ namespace Ex03.ConsoleUI
             }
             while (!isValidManufacture);
 
-            Console.Write("Please enter the current air pressure of the tires:   ");
+            Console.Write("Please enter the current air pressure of the tires, where the maximum air pressure is " + i_newVehicle.MaxTireAirPressure);
             do
             {
                 CurrentAirPressureInput = Console.ReadLine();

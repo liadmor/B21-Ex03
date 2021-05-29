@@ -14,7 +14,7 @@ namespace Ex03.GarageLogic
         protected List<Tires> m_Tire;
         Factory.ePossibleVehicles m_VehicleType;
         int m_NumberOfTires;
-        int m_MaxTireAirPressure;
+        float m_MaxTireAirPressure;
         float m_MaxEnergySource;
         protected float m_CurrentEnergySource;
 
