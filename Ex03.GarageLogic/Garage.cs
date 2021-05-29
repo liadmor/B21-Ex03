@@ -99,7 +99,19 @@ namespace Ex03.GarageLogic
 
         public void RefuelAFuelBasedVehicle(string i_licensingNumber, FuelBasedVehicles.eFuelType i_FuelType, float i_AmountToFill)
         {
-            (VehicleInTheGarage[i_licensingNumber].Vehicle as FuelBasedVehicles).Refuel(i_AmountToFill, i_FuelType);
+            /*try
+            {*/
+            Console.WriteLine(VehicleInTheGarage[i_licensingNumber].Vehicle.CurrentEnergySource);
+                (VehicleInTheGarage[i_licensingNumber].Vehicle as FuelBasedVehicles).Refuel(i_AmountToFill, i_FuelType);
+            /*}
+            catch ( ArgumentException eArgumentExeption)
+            {
+            }
+            catch (ValueOutOfRangeException eValueOutOfRangeException)
+            {
+            }*/
+
+            
         }
 
         public void ChargeAnElectricBasedVehicle(string i_licensingNumber, float i_NumberOfMinutesToCharge)

@@ -10,14 +10,12 @@ namespace Ex03.GarageLogic
     {
         protected eFuelType m_VehicleFuelType;
         protected float m_VehichleMaxTank;
-        protected float m_CurrentFuel;
 
         public FuelBasedVehicles(eFuelType i_FuelType, int i_NumberOfTires, int i_MaxPrashore, float i_MaxEnergiSource) :
             base(i_NumberOfTires, i_MaxPrashore, i_MaxEnergiSource)
         {
             m_VehicleFuelType = i_FuelType;
             m_VehichleMaxTank = i_MaxEnergiSource;
-            m_CurrentFuel = m_CurrentEnergySource;
         }
 
         public eFuelType VehicleFuelType
@@ -33,25 +31,22 @@ namespace Ex03.GarageLogic
             
         }
 
-
-
         public void Refuel(float i_HowMuchFuelToAdd, eFuelType i_FuelType)
         {
-
+            Console.WriteLine(m_CurrentEnergySource);
             if (m_VehicleFuelType != i_FuelType)
             {
                 throw new ArgumentException();
             }
             else
             {
-                if (i_HowMuchFuelToAdd + m_CurrentFuel > m_VehichleMaxTank)
+                if (i_HowMuchFuelToAdd + m_CurrentEnergySource > m_VehichleMaxTank)
                 {
-                    throw new ValueOutOfRangeException(0, m_VehichleMaxTank - m_CurrentFuel);
-
+                    throw new ValueOutOfRangeException(0, m_VehichleMaxTank - m_CurrentEnergySource);
                 }
                 else 
                 {
-                    m_CurrentFuel += i_HowMuchFuelToAdd;
+                    m_CurrentEnergySource += i_HowMuchFuelToAdd;
                 }
             }
         }
@@ -60,11 +55,11 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_CurrentFuel;
+                return m_CurrentEnergySource;
             }
             set
             {
-                m_CurrentFuel = value;
+                m_CurrentEnergySource = value;
             }
         }
 
@@ -74,13 +69,13 @@ namespace Ex03.GarageLogic
 
             stringInformationFuelBaseVehicle = string.Format(
                                                   @"this vehicle based on Fuel{0}
-                                                  the current fuel is: [{1}/{2}]", base.ToString(), m_CurrentFuel, m_VehichleMaxTank);
+                                                  the current fuel is: [{1}/{2}]", base.ToString(), m_CurrentEnergySource, m_VehichleMaxTank);
             return stringInformationFuelBaseVehicle;
         }
 
         public enum eFuelType
         {
-            Soler,
+            Soler = 1,
             Octan95,
             Octan96,
             Octan98

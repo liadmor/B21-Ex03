@@ -118,6 +118,7 @@ namespace Ex03.ConsoleUI
                 case Factory.ePossibleVehicles.ElectricBasedCar://vehicle is car
                 case Factory.ePossibleVehicles.FuelBaseCar:
                     GetCurrentEnergyAmountFromUser(newVehicle);
+                    Console.WriteLine(newVehicle.CurrentEnergySource);
                     GetColorFromUser(newVehicle);
                     GetDoorsNumberFromUser(newVehicle);
                     break;
@@ -194,7 +195,7 @@ namespace Ex03.ConsoleUI
             int filterLicense = int.Parse(Console.ReadLine());
             StringBuilder licenseNumbersString = new StringBuilder();
             List<string> ListLicenseNumbers = r_NewGarage.ListOfLicensingNumberOfTheVehicleInTheGarageByStatus((Garage.OwnerInformation.eVehicleStatus)filterLicense);
-            licenseNumbersString.AppendFormat("The license number in the gerage that {0}: {1}", (Garage.OwnerInformation.eVehicleStatus)filterLicense, Environment.NewLine());
+            licenseNumbersString.AppendFormat("The license number in the gerage that {0}: {1}", (Garage.OwnerInformation.eVehicleStatus)filterLicense, Environment.NewLine);
             foreach (string licenseNumber in ListLicenseNumbers)
             {
                 licenseNumbersString.Append(licenseNumber);
@@ -242,11 +243,45 @@ namespace Ex03.ConsoleUI
 
         private void RefuelVehicle()
         {
-            string VihecleLicense = getLicenseNumberFromUser();
-            FuelBasedVehicles.eFuelType FuelType = (r_NewGarage.VehicleInTheGarage[VihecleLicense].Vehicle as FuelBasedVehicles).VehicleFuelType;
-            Console.WriteLine("Please enter the amount to fill");
-            float AmountToFill = float.Parse(Console.ReadLine());
-            r_NewGarage.RefuelAFuelBasedVehicle(VihecleLicense, FuelType, AmountToFill);
+            string VihecleLicense;
+            do
+            {
+                VihecleLicense = getLicenseNumberFromUser();
+            } while (!IsTheLicenseInGarege(VihecleLicense));
+            
+            Console.Write(
+@"Fuel Type
+1   Soler
+2   Octan95
+3   Octan96
+4   Octan98
+Please select Fuel type: ");
+            int FuelType;
+            string AmountToFillInput;
+            float AmountToFill;
+
+            try
+            {
+                FuelType = Validation.ReceiveEnumInput<FuelBasedVehicles.eFuelType>();
+                Console.WriteLine("Please enter the amount to fill");
+                do
+                {
+                    AmountToFillInput = Console.ReadLine();
+
+                } while (!ValidInputFloat(AmountToFillInput));
+
+                AmountToFill = float.Parse(AmountToFillInput);
+                r_NewGarage.RefuelAFuelBasedVehicle(VihecleLicense, (FuelBasedVehicles.eFuelType)FuelType, AmountToFill);
+                Console.WriteLine("Refuel succese");
+            }
+            catch (ArgumentException argumentException)
+            {
+                Console.Write(" This vehicle does not get this type of fuel type");
+            }
+            catch (ValueOutOfRangeException ValueOutOfRange)
+            {
+                Console.WriteLine(ValueOutOfRange.Message);
+            }
         }
 
         private void ChargeVehicle()
@@ -339,8 +374,9 @@ namespace Ex03.ConsoleUI
             do
             {
                 CurrentAirPressureInput = Console.ReadLine();
+                isValidAirPressure = true;
                 //TODO check if the input bigger than the max
-                isValidAirPressure = Validation.CheckAirPressure(CurrentAirPressureInput);
+                //isValidAirPressure = Validation.CheckAirPressure(CurrentAirPressureInput);
             }
             while (!isValidAirPressure);
 
@@ -438,6 +474,7 @@ namespace Ex03.ConsoleUI
 
             do
             {
+                //TODO FIX INVALID INPUT
                 doorsNumber = int.Parse(Console.ReadLine());
                 isValidDoorsNumber = GarageLogic.Validation.CheckDoorsNumber(doorsNumber);
             }

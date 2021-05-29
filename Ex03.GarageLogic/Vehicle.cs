@@ -75,6 +75,8 @@ namespace Ex03.GarageLogic
             set
             {
                 m_CurrentEnergySource = value;
+                
+                
             }
         }
 
@@ -125,7 +127,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public int MaxTireAirPressure
+        public float MaxTireAirPressure
         {
             get
             {
