@@ -298,7 +298,8 @@ namespace Ex03.ConsoleUI
             {
                 VihecleLicense = getLicenseNumberFromUser();
             } while (!IsTheLicenseInGarege(VihecleLicense));
-            r_NewGarage.DisplayVehicleInformation(VihecleLicense);
+
+            Console.WriteLine(r_NewGarage.DisplayVehicleInformation(VihecleLicense));
             
             //סוג דלק, מצב מצבר, שאר מידע רלוונטי כתלות בסוג רכב
             //not finish

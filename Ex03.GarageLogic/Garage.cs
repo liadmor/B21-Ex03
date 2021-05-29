@@ -112,7 +112,7 @@ namespace Ex03.GarageLogic
         {
 
             //return VehicleInTheGarage[i_licensingNumber].ToString();
-            return VehicleInTheGarage[i_licensingNumber].ToString();
+            return (VehicleInTheGarage[i_licensingNumber]).liadToString();
         }
 
 
@@ -183,7 +183,7 @@ namespace Ex03.GarageLogic
                 Paid
             }
 
-            public override string ToString()
+            public string liadToString()
             {
                 string vehicleInformationOutput = string.Format(
                                                                 @"Owner:
@@ -195,8 +195,7 @@ namespace Ex03.GarageLogic
                                                                 m_VehicleOwnerName,
                                                                 m_VehicleOwnerPhone,
                                                                 m_VehicleStatus,
-                                                                m_Vehicle.ToString());
-
+                                                               Vehicle.ToString());
                 return vehicleInformationOutput;
             }
         }
