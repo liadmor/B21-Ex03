@@ -57,14 +57,8 @@ namespace Ex03.GarageLogic
 
         public void Inflatoin(float i_AirPressiroToAdd)
         {
-            if (CurrentAirPressure + i_AirPressiroToAdd <= MaxAirPressure)
-            {
                 CurrentAirPressure += i_AirPressiroToAdd;
-            }
-            else
-            {
-                throw new ValueOutOfRangeException(0, MaxAirPressure - CurrentAirPressure);
-            }
+       
         }
 
         public override string ToString()

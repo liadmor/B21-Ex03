@@ -83,25 +83,6 @@ namespace Ex03.GarageLogic
             return isValidLicenseNumber;
         }
 
-
-        /*public static bool CheckAirPressure(string i_AirPressure, float i_MaxAirPressure)
-        {
-            float airPressure = 0;
-            bool IsValidAirPressure = true;
-
-            if (!float.TryParse(i_AirPressure, out airPressure))
-            {
-                throw new FormatException();
-               // IsValidAirPressure = false;
-            }
-            else if (airPressure > i_MaxAirPressure || airPressure < 0)
-            {
-                throw new ValueOutOfRangeException(0, i_MaxAirPressure);
-            }
-
-           // return IsValidAirPressure;
-        }*/
-
         public static int ReceiveEnumInput<T>()
         {
             int selectedOption = -1;
@@ -114,6 +95,10 @@ namespace Ex03.GarageLogic
                 if (int.TryParse(userSelection, out selectedOption))
                 {
                     isValidInput = IsInEnumOptionRange<T>(selectedOption);
+                }
+                else
+                {
+                    throw new FormatException();
                 }
 
                 if (!isValidInput)
@@ -133,29 +118,23 @@ namespace Ex03.GarageLogic
 
 
         public static bool CheckEngineCapacity(int i_engineCapacity)
-        {
-            bool isValidInput = true;
-            
-            if(i_engineCapacity < 0)
+        {          
+            if (i_engineCapacity < 0)
             {
-                isValidInput = false;
-                Console.Write("Engine Capacity number must contain positive number, please enter again: ");
+               throw new ArgumentException("Engine Capacity number must contain positive number");
             }
 
-            return isValidInput;
+            return true;
         }
 
         public static bool CheckCurrentEnergy(float i_CurrentEnergy, float i_MaxEnergy)
         {
-            bool isValidInput = true;
-
             if (i_CurrentEnergy > i_MaxEnergy)
             {
-                Console.WriteLine("You have imported more energy than the maximum, please enter again:");
-                isValidInput = false;
+                throw new ValueOutOfRangeException(0, i_MaxEnergy);       
             }
 
-            return isValidInput;
+            return true;
         }
 
         public static bool CheckDoorsNumber(int i_DoorsNumber)

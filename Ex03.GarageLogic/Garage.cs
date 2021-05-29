@@ -94,22 +94,15 @@ namespace Ex03.GarageLogic
             foreach (Tires tire in VehicleInTheGarage[i_licensingNumber].Vehicle.Tire)
             {
                 tire.Inflatoin(tire.MaxAirPressure - tire.CurrentAirPressure);
+                Console.WriteLine(tire.CurrentAirPressure);
             }
         }
 
         public void RefuelAFuelBasedVehicle(string i_licensingNumber, FuelBasedVehicles.eFuelType i_FuelType, float i_AmountToFill)
         {
-            /*try
-            {*/
-            Console.WriteLine(VehicleInTheGarage[i_licensingNumber].Vehicle.CurrentEnergySource);
+           
                 (VehicleInTheGarage[i_licensingNumber].Vehicle as FuelBasedVehicles).Refuel(i_AmountToFill, i_FuelType);
-            /*}
-            catch ( ArgumentException eArgumentExeption)
-            {
-            }
-            catch (ValueOutOfRangeException eValueOutOfRangeException)
-            {
-            }*/
+           
 
             
         }

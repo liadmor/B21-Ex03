@@ -44,36 +44,45 @@ namespace Ex03.ConsoleUI
         internal UserInterface()
         {
             r_NewGarage = new Garage();
+            Console.WriteLine("\t\tWELCOME TO GILIAD GARAGE");
             mainMenu();
         }
 
         private void mainMenu()
         {
             bool exitGarage = false;
+            int getOption;
 
             while (!exitGarage)
             {
                 presentUserMenu();
-                int getOption = Validation.ReceiveEnumInput<eGarageMenu>();
-
-                if (getOption == k_ExitProgram)
+                try
                 {
-                    exitGarage = true;
-                    break;
+                    getOption = Validation.ReceiveEnumInput<eGarageMenu>();
+
+                    if (getOption == k_ExitProgram)
+                    {
+                        exitGarage = true;
+                        break;
+                    }
+
+                    GarageMenuOperation((eGarageMenu)getOption);
+                    if (!exitGarage)
+                    {
+                        PressEnterToMainMenu();
+
+                    }
                 }
-
-                GarageMenuOperation((eGarageMenu)getOption);
-                if (!exitGarage)
+                catch (FormatException)
                 {
-                    PressEnterToMainMenu();
-
+                    Console.WriteLine("You need to choose one of the given option");
                 }
             }
         }
 
         private void PressEnterToMainMenu()
         {
-            Console.Write("Press ENTER to return the Main Menu");
+            Console.WriteLine("Press ENTER to return the Main Menu");
             Console.ReadLine();
             Console.Clear();
         }
@@ -89,6 +98,7 @@ namespace Ex03.ConsoleUI
         {
             int selectedVehicleType;
             int indexToChoose = 1;
+            Vehicle newVehicle = null;
             string[] possibleVehiclesTypes = Enum.GetNames(typeof(Factory.ePossibleVehicles));
             StringBuilder possibleVehiclesToChoose = new StringBuilder();
 
@@ -97,38 +107,42 @@ namespace Ex03.ConsoleUI
                 possibleVehiclesToChoose.AppendLine(string.Format("{0}\t{1}", indexToChoose, vehicleType));
                 indexToChoose++;
             }
-
-            Console.WriteLine("Please select the vehicle type: " + possibleVehiclesToChoose);
-            selectedVehicleType = Validation.ReceiveEnumInput<Factory.ePossibleVehicles>();
-            Vehicle newVehicle = Factory.NewVehicle((Factory.ePossibleVehicles)selectedVehicleType);
-            newVehicle.LicensingNumber = i_LicenseNumber;
-            newVehicle.VehicleType = (Factory.ePossibleVehicles)selectedVehicleType;
-            GetTiresInfoFromUser(newVehicle);
-
-
-            switch (newVehicle.VehicleType)
+            try
             {
-                case Factory.ePossibleVehicles.ElectricBasedMotorcycle://vehicle is motorcycle
-                case Factory.ePossibleVehicles.FuelBasedMotorcycle:
-                    GetLicenseTypeFromUser(newVehicle);
-                    GetEngineCapacityFromUser(newVehicle);
-                    GetCurrentEnergyAmountFromUser(newVehicle);
-                    break;
+                    Console.WriteLine("Please select the vehicle type: " + possibleVehiclesToChoose);
+                    selectedVehicleType = Validation.ReceiveEnumInput<Factory.ePossibleVehicles>();
+                    newVehicle = Factory.NewVehicle((Factory.ePossibleVehicles)selectedVehicleType);
+                    newVehicle.LicensingNumber = i_LicenseNumber;
+                    newVehicle.VehicleType = (Factory.ePossibleVehicles)selectedVehicleType;
+                    GetTiresInfoFromUser(newVehicle);
 
-                case Factory.ePossibleVehicles.ElectricBasedCar://vehicle is car
-                case Factory.ePossibleVehicles.FuelBaseCar:
-                    GetCurrentEnergyAmountFromUser(newVehicle);
-                    Console.WriteLine(newVehicle.CurrentEnergySource);
-                    GetColorFromUser(newVehicle);
-                    GetDoorsNumberFromUser(newVehicle);
-                    break;
+                switch (newVehicle.VehicleType)
+                {
+                    case Factory.ePossibleVehicles.ElectricBasedMotorcycle://vehicle is motorcycle
+                    case Factory.ePossibleVehicles.FuelBasedMotorcycle:
+                        GetLicenseTypeFromUser(newVehicle);
+                        GetEngineCapacityFromUser(newVehicle);
+                        GetCurrentEnergyAmountFromUser(newVehicle);
+                        break;
 
-                case Factory.ePossibleVehicles.Truck://vehicle is truck
-                    GetCurrentEnergyAmountFromUser(newVehicle);
-                    GetIfDangerusSubstences(newVehicle);
-                    GetMaxTank(newVehicle);
-                    break;
+                    case Factory.ePossibleVehicles.ElectricBasedCar://vehicle is car
+                    case Factory.ePossibleVehicles.FuelBaseCar:
+                        GetCurrentEnergyAmountFromUser(newVehicle);
+                        Console.WriteLine(newVehicle.CurrentEnergySource);
+                        GetColorFromUser(newVehicle);
+                        GetDoorsNumberFromUser(newVehicle);
+                        break;
 
+                    case Factory.ePossibleVehicles.Truck://vehicle is truck
+                        GetCurrentEnergyAmountFromUser(newVehicle);
+                        GetIfDangerusSubstences(newVehicle);
+                        GetMaxTank(newVehicle);
+                        break;
+
+                }
+            }
+            catch (FormatException)
+            {
             }
             return newVehicle;
         }
@@ -187,41 +201,55 @@ namespace Ex03.ConsoleUI
 
         private void printLicenseNumbersByStatuse()
         {
+            int filterLicense;
+
             Console.WriteLine(@"Please enter the filter where you would like to print the license list - choose an option: 
                                         1   InRepaired
                                         2   Repaired
                                         3   Paid");
-
-            int filterLicense = int.Parse(Console.ReadLine());
-            StringBuilder licenseNumbersString = new StringBuilder();
-            List<string> ListLicenseNumbers = r_NewGarage.ListOfLicensingNumberOfTheVehicleInTheGarageByStatus((Garage.OwnerInformation.eVehicleStatus)filterLicense);
-            licenseNumbersString.AppendFormat("The license number in the gerage that {0}: {1}", (Garage.OwnerInformation.eVehicleStatus)filterLicense, Environment.NewLine);
-            foreach (string licenseNumber in ListLicenseNumbers)
+            try
             {
-                licenseNumbersString.Append(licenseNumber);
-                licenseNumbersString.Append(Environment.NewLine);
+                filterLicense = Validation.ReceiveEnumInput<Garage.OwnerInformation.eVehicleStatus>();
+                StringBuilder licenseNumbersString = new StringBuilder();
+                List<string> ListLicenseNumbers = r_NewGarage.ListOfLicensingNumberOfTheVehicleInTheGarageByStatus((Garage.OwnerInformation.eVehicleStatus)filterLicense);
+                licenseNumbersString.AppendFormat("The license number in the gerage that {0}: {1}", (Garage.OwnerInformation.eVehicleStatus)filterLicense, Environment.NewLine);
+                foreach (string licenseNumber in ListLicenseNumbers)
+                {
+                    licenseNumbersString.Append(licenseNumber);
+                    licenseNumbersString.Append(Environment.NewLine);
+                }
+                Console.WriteLine(licenseNumbersString);
             }
-            Console.WriteLine(licenseNumbersString);
+            catch (FormatException)
+            {
+            }
         }
 
         private void ChangeStatusVehicle()
         {
+            int newStatus;
+
             Console.WriteLine(@"Please enter the new status of the vehicle - choose an option: 
                                         1   InRepaired
                                         2   Repaired
                                         3   Paid");
-
-            int newStatus = int.Parse(Console.ReadLine());
-            string VihecleLicense = getLicenseNumberFromUser();
-            if (IsTheLicenseInGarege(VihecleLicense))
+            try
             {
-                r_NewGarage.ChangeStatusVehicle(VihecleLicense, (Garage.OwnerInformation.eVehicleStatus)newStatus);
+                newStatus = Validation.ReceiveEnumInput<Garage.OwnerInformation.eVehicleStatus>();
+                string VihecleLicense = getLicenseNumberFromUser();
+                if (IsTheLicenseInGarege(VihecleLicense))
+                {
+                    r_NewGarage.ChangeStatusVehicle(VihecleLicense, (Garage.OwnerInformation.eVehicleStatus)newStatus);
 
+                }
+                else
+                {
+                    Console.WriteLine("The license number is not in the garage");
+                    PressEnterToMainMenu();
+                }
             }
-            else
+            catch (FormatException)
             {
-                Console.WriteLine("The license number is not in the garage");
-                PressEnterToMainMenu();
             }
         }
         private bool IsTheLicenseInGarege( string i_LicenseNumber)
@@ -238,7 +266,10 @@ namespace Ex03.ConsoleUI
                 VihecleLicense = getLicenseNumberFromUser();
             } while (!IsTheLicenseInGarege(VihecleLicense));
 
+            Console.WriteLine("inflating, please wait...");
             r_NewGarage.InflateTiresToMax(VihecleLicense);
+            Console.WriteLine("Done!");
+
         }
 
         private void RefuelVehicle()
@@ -249,7 +280,7 @@ namespace Ex03.ConsoleUI
                 VihecleLicense = getLicenseNumberFromUser();
             } while (!IsTheLicenseInGarege(VihecleLicense));
             
-            Console.Write(
+            Console.WriteLine(
 @"Fuel Type
 1   Soler
 2   Octan95
@@ -274,7 +305,7 @@ Please select Fuel type: ");
                 r_NewGarage.RefuelAFuelBasedVehicle(VihecleLicense, (FuelBasedVehicles.eFuelType)FuelType, AmountToFill);
                 Console.WriteLine("Refuel succese");
             }
-            catch (ArgumentException argumentException)
+            catch (ArgumentException)
             {
                 Console.Write(" This vehicle does not get this type of fuel type");
             }
@@ -288,21 +319,32 @@ Please select Fuel type: ");
         {
 
             string VihecleLicense;
+            string AmountToFillInput;
+            float AmountToFill;
 
             do
             {
                 VihecleLicense = getLicenseNumberFromUser();
             } while (!IsTheLicenseInGarege(VihecleLicense));
 
-            Console.WriteLine("Please enter the amount to fill, the maximum is " + r_NewGarage.VehicleInTheGarage[VihecleLicense].Vehicle.MaxEnergySource);
-            String amountToFillInput = Console.ReadLine();
-            while (!ValidInputFloat(amountToFillInput))
+
+            try
             {
-                Console.WriteLine("Invalid input, Please enter the amount to fill");
-                amountToFillInput = Console.ReadLine();
+                Console.WriteLine("Please enter the amount to fill in minutes");
+                do
+                {
+                    AmountToFillInput = Console.ReadLine();
+
+                } while (!ValidInputFloat(AmountToFillInput));
+
+                AmountToFill = float.Parse(AmountToFillInput);
+                r_NewGarage.ChargeAnElectricBasedVehicle(VihecleLicense, (AmountToFill / 60));
+                Console.WriteLine("Recharge succese");
             }
-            float AmountToFill = float.Parse(Console.ReadLine());
-            r_NewGarage.ChargeAnElectricBasedVehicle(VihecleLicense, AmountToFill);
+            catch (ValueOutOfRangeException ValueOutOfRange)
+            {
+                Console.WriteLine(ValueOutOfRange.Message);
+            }
         }
 
         private bool ValidInputFloat(string i_input)
@@ -357,7 +399,7 @@ Please select Fuel type: ");
         private void GetTiresInfoFromUser(Vehicle i_newVehicle)
         {
             bool isValidManufacture;
-            bool isValidAirPressure;
+           //bool isValidAirPressure;
             string manufacturerName;
             string CurrentAirPressureInput;
             float CurrentAirPressure;
@@ -370,153 +412,169 @@ Please select Fuel type: ");
             }
             while (!isValidManufacture);
 
-            Console.Write("Please enter the current air pressure of the tires, where the maximum air pressure is " + i_newVehicle.MaxTireAirPressure);
-            do
+            try
             {
-                CurrentAirPressureInput = Console.ReadLine();
-                isValidAirPressure = true;
-                //TODO check if the input bigger than the max
-                //isValidAirPressure = Validation.CheckAirPressure(CurrentAirPressureInput);
-            }
-            while (!isValidAirPressure);
+                Console.Write("Please enter the current air pressure of the tires, where the maximum air pressure is " + i_newVehicle.MaxTireAirPressure);
+                do
+                {
+                    CurrentAirPressureInput = Console.ReadLine();
 
-            CurrentAirPressure = float.Parse(CurrentAirPressureInput);
-            i_newVehicle.SetTireInfo(manufacturerName, i_newVehicle.MaxTireAirPressure, CurrentAirPressure);
+                } while (!ValidInputFloat(CurrentAirPressureInput));
+
+                CurrentAirPressure = float.Parse(CurrentAirPressureInput);
+                i_newVehicle.SetTireInfo(manufacturerName, i_newVehicle.MaxTireAirPressure, CurrentAirPressure);
+            }
+            catch(ValueOutOfRangeException valueOutOfRange)
+            {
+                Console.WriteLine(valueOutOfRange.Message);
+            }
         }
 
         private void GetLicenseTypeFromUser(Vehicle i_newVehicle)
         {
             int licenseType;
-            string licenseTypeInput;
-            bool isValidLicenseType;
 
-            Console.Write(@"Please enter the license type - choose an option: 
+            Console.WriteLine(@"Please enter the license type - choose an option: 
                                         1   A
                                         2   B1
                                         3   AA
                                         4   BB");
 
-            do
-            {
-                licenseTypeInput = Console.ReadLine();
-                isValidLicenseType = Validation.CheckColorCar(licenseTypeInput);
-            }
-            while (!isValidLicenseType);
+            try {
 
-            licenseType = int.Parse(licenseTypeInput);
-            if (i_newVehicle is FuelBasedMotorcycle)
-            {
-                ((i_newVehicle as FuelBasedVehicles) as FuelBasedMotorcycle).LicenseType = (Motorcycle.eLicenseType)licenseType;
-            }
-            else
-            {
-                ((i_newVehicle as ElectricBasedVehicles) as ElectricMotorcycle).LicenseType = (Motorcycle.eLicenseType)licenseType;
+                licenseType = Validation.ReceiveEnumInput<Motorcycle.eLicenseType>();
 
+                if (i_newVehicle is FuelBasedMotorcycle)
+                {
+                    ((i_newVehicle as FuelBasedVehicles) as FuelBasedMotorcycle).LicenseType = (Motorcycle.eLicenseType)licenseType;
+                }
+                else
+                {
+                    ((i_newVehicle as ElectricBasedVehicles) as ElectricMotorcycle).LicenseType = (Motorcycle.eLicenseType)licenseType;
+
+                }
+            }
+            catch (FormatException)
+            {
             }
         }
 
         private void GetEngineCapacityFromUser(Vehicle i_newVehicle)
         {
             int engineCapacity;
-            bool isValidEngineCapacity;
+            bool isValidEngineCapacity = false;
 
-            Console.Write(@"Please enter the engine capacity in cc: must be Positiv number ");
+            Console.WriteLine(@"Please enter the engine capacity in cc: must be Positiv number ");
             do
             {
+                try
+                {
+                    engineCapacity = int.Parse(Console.ReadLine());
+                    isValidEngineCapacity = Validation.CheckEngineCapacity(engineCapacity);
 
-                //TODO try catch
-                engineCapacity = int.Parse(Console.ReadLine());
-                isValidEngineCapacity = Validation.CheckEngineCapacity(engineCapacity);
-            }
-            while (!isValidEngineCapacity);
-            if (i_newVehicle is FuelBasedMotorcycle)
-            {
-                ((i_newVehicle as FuelBasedVehicles) as FuelBasedMotorcycle).Enginecapacity = engineCapacity;
-            }
-            else
-            {
-                ((i_newVehicle as ElectricBasedVehicles) as ElectricMotorcycle).EngineCapacity = engineCapacity;
+                    if (i_newVehicle is FuelBasedMotorcycle)
+                    {
+                        ((i_newVehicle as FuelBasedVehicles) as FuelBasedMotorcycle).Enginecapacity = engineCapacity;
+                    }
+                    else
+                    {
+                        ((i_newVehicle as ElectricBasedVehicles) as ElectricMotorcycle).EngineCapacity = engineCapacity;
+
+                    }
+                }
+                catch (FormatException)
+                {
+                }
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            } while (!isValidEngineCapacity);
 
             }
-
-        }
+           
 
         private void GetCurrentEnergyAmountFromUser(Vehicle i_newVehicle)
         {
             float currentEnergy, MaxEnergy;
-            bool isValidCurrenEnergy;
+            bool isValidCurrenEnergy = false;
 
             MaxEnergy = i_newVehicle.MaxEnergySource;
-            Console.Write(@"Please enter the current engine capacity: ");
+            Console.Write(@"Please enter the current energy amount, the maximum is " + i_newVehicle.MaxEnergySource);
 
             do
             {
-                //TODO TRY CATCH
-                //ADD TO THE PRINT THE MAXCAPACITY
-                currentEnergy = float.Parse(Console.ReadLine());
-                isValidCurrenEnergy = Validation.CheckCurrentEnergy(currentEnergy, MaxEnergy);
-            }
-            while (!isValidCurrenEnergy);
+                try
+                {
+                    currentEnergy = float.Parse(Console.ReadLine());
+                    isValidCurrenEnergy = Validation.CheckCurrentEnergy(currentEnergy, MaxEnergy);
+                    i_newVehicle.CurrentEnergySource = currentEnergy;
+                }
+                catch (FormatException)
+                {
+                }
+                catch (ValueOutOfRangeException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }  while (!isValidCurrenEnergy);
 
-            i_newVehicle.CurrentEnergySource = currentEnergy;
+            
         }
 
         private void GetDoorsNumberFromUser(Vehicle i_newVehicle)
         {
             int doorsNumber;
-            bool isValidDoorsNumber;
 
-            Console.Write(@"Please enter the number of doors: 
+            Console.WriteLine(@"Please enter the number of doors: 
                                        2   
                                        3    
                                        4    
                                        5");
 
-            do
+            try
             {
-                //TODO FIX INVALID INPUT
-                doorsNumber = int.Parse(Console.ReadLine());
-                isValidDoorsNumber = GarageLogic.Validation.CheckDoorsNumber(doorsNumber);
+                doorsNumber = Validation.ReceiveEnumInput<Car.eNunDoors>();
+                if (i_newVehicle is FuelBasedCar)
+                {
+                    ((i_newVehicle as FuelBasedVehicles) as FuelBasedCar).NumberOfDoors = (Car.eNunDoors)doorsNumber;
+                }
+                else
+                {
+                    ((i_newVehicle as ElectricBasedVehicles) as ElectricCar).NumberOfDoors = (Car.eNunDoors)doorsNumber;
+                }
             }
-            while (!isValidDoorsNumber);
-            if (i_newVehicle is FuelBasedCar)
+            catch (FormatException)
             {
-                ((i_newVehicle as FuelBasedVehicles) as FuelBasedCar).NumberOfDoors = (Car.eNunDoors)doorsNumber;
             }
-            else
-            {
-                ((i_newVehicle as ElectricBasedVehicles) as ElectricCar).NumberOfDoors = (Car.eNunDoors)doorsNumber;
-            }
-
         }
+           
         private void GetColorFromUser(Vehicle i_newVehicle)
         {
             int color;
-            String colorInput;
-            bool isValidColor;
 
-            Console.Write(@"Please enter the car's color: 
+            Console.WriteLine(@"Please enter the car's color: 
                                                             1   Red
                                                             2   Black,
                                                             3   White,
                                                             4   Silver");
 
-            do
-            {
-                colorInput = Console.ReadLine();
-                isValidColor = Validation.CheckColorCar(colorInput);
+            try { 
+                color = Validation.ReceiveEnumInput<Car.eNunDoors>();
+                if (i_newVehicle is FuelBasedCar)
+                {
+                    ((i_newVehicle as FuelBasedVehicles) as FuelBasedCar).Color = (Car.eColor)color;
+                }
+                else
+                {
+                    ((i_newVehicle as ElectricBasedVehicles) as ElectricCar).Color = (Car.eColor)color;
+                }
             }
-            while (!isValidColor);
+            catch (FormatException)
+            {
+            }
+         
 
-            color = int.Parse(colorInput);
-            if (i_newVehicle is FuelBasedCar)
-            {
-                ((i_newVehicle as FuelBasedVehicles) as FuelBasedCar).Color = (Car.eColor)color;
-            }
-            else
-            {
-                ((i_newVehicle as ElectricBasedVehicles) as ElectricCar).Color = (Car.eColor)color;
-            }
         }
 
         private void GetIfDangerusSubstences(Vehicle i_newVehicle)
@@ -529,12 +587,12 @@ Please select Fuel type: ");
             do
             {
                 inputToCheck = Console.ReadLine();
-                isValidAnswerDangerus = GarageLogic.Validation.CheckAnsDangerus(inputToCheck);
+                isValidAnswerDangerus = Validation.CheckAnsDangerus(inputToCheck);
             }
             while (!isValidAnswerDangerus);
             dangerusSubstences = bool.Parse(inputToCheck);
 
-            ((i_newVehicle as FuelBasedVehicles) as Truck).IsContainDangerouSsubstance = dangerusSubstences;
+            ((i_newVehicle as FuelBasedVehicles) as Truck).IsContainDangerousSubstances = dangerusSubstences;
         }
         private void GetMaxTank(Vehicle i_newVehicle)
         {

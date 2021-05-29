@@ -82,11 +82,18 @@ namespace Ex03.GarageLogic
 
         public void SetTireInfo(string i_ManufacturerName, float i_MaxAirPressure, float i_CurrentAirPressure)
         {
-            foreach (Tires tire in m_Tire)
+            if (i_MaxAirPressure >= i_CurrentAirPressure)
             {
-                tire.ManufacturerName = i_ManufacturerName;
-                tire.MaxAirPressure = i_MaxAirPressure;
-                tire.CurrentAirPressure = i_CurrentAirPressure;
+                foreach (Tires tire in m_Tire)
+                {
+                    tire.ManufacturerName = i_ManufacturerName;
+                    tire.MaxAirPressure = i_MaxAirPressure;
+                    tire.CurrentAirPressure = i_CurrentAirPressure;
+                }
+            }
+            else
+            {
+                throw new ValueOutOfRangeException(0, i_MaxAirPressure);
             }
         }
 

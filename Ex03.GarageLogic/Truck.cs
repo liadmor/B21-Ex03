@@ -21,7 +21,7 @@ namespace Ex03.GarageLogic
         {
         }
 
-        public bool IsContainDangerouSsubstance
+        public bool IsContainDangerousSubstances
         {
             get
             {
