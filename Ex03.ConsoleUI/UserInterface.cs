@@ -66,6 +66,7 @@ namespace Ex03.ConsoleUI
                 if (!exitGarage)
                 {
                     PressEnterToMainMenu();
+
                 }
             }
         }
@@ -164,7 +165,7 @@ namespace Ex03.ConsoleUI
             bool isValidInput;
 
             receiveVehicleOwnerInformation(out ownerName, out ownerPhoneNumber);
-            r_NewGarage.AddNewVehicle(ownerName, ownerPhoneNumber, i_NewVehicle);
+            Console.WriteLine(r_NewGarage.AddNewVehicle(ownerName, ownerPhoneNumber, i_NewVehicle));
         }
 
         private void exitSystem()
@@ -190,10 +191,11 @@ namespace Ex03.ConsoleUI
                                         1   InRepaired
                                         2   Repaired
                                         3   Paid");
-
+            //TODO change the TOstring;
             int filterLicense = int.Parse(Console.ReadLine());
             StringBuilder licenseNumbersString = new StringBuilder();
             List<string> ListLicenseNumbers = r_NewGarage.ListOfLicensingNumberOfTheVehicleInTheGarageByStatus((Garage.OwnerInformation.eVehicleStatus)filterLicense);
+            licenseNumbersString.AppendFormat("The license number in the gerage that {0}", (Garage.OwnerInformation.eVehicleStatus)filterLicense);
             foreach (string licenseNumber in ListLicenseNumbers)
             {
                 licenseNumbersString.Append(licenseNumber);
@@ -229,7 +231,13 @@ namespace Ex03.ConsoleUI
         }
         private void InflateTiresToMax()
         {
-            string VihecleLicense = getLicenseNumberFromUser();
+            string VihecleLicense;
+
+            do
+            {
+                VihecleLicense = getLicenseNumberFromUser();
+            } while (!IsTheLicenseInGarege(VihecleLicense));
+
             r_NewGarage.InflateTiresToMax(VihecleLicense);
         }
 
@@ -244,6 +252,8 @@ namespace Ex03.ConsoleUI
 
         private void ChargeVehicle()
         {
+
+            //TODO ADD DO WHILE ANTIL WE GET VALID INPUT
             string VihecleLicense = getLicenseNumberFromUser();
             Console.WriteLine("Please enter the amount to fill");
             String amountToFillInput = Console.ReadLine();
@@ -283,14 +293,13 @@ namespace Ex03.ConsoleUI
         private void ShowVehicleInformation()
         {
 
-            string VihecleLicense = getLicenseNumberFromUser();
-            // TODO - check if the lisience apire in the garage
-            StringBuilder ToStringInfo = new StringBuilder();
+            string VihecleLicense;
+            do
+            {
+                VihecleLicense = getLicenseNumberFromUser();
+            } while (!IsTheLicenseInGarege(VihecleLicense));
+            r_NewGarage.DisplayVehicleInformation(VihecleLicense);
             
-            ToStringInfo.Append(r_NewGarage.VehicleInTheGarage[VihecleLicense].Vehicle.ToString());
-            ToStringInfo.Append(r_NewGarage.VehicleInTheGarage[VihecleLicense].ToString());
-
-            Console.WriteLine(ToStringInfo);
             //סוג דלק, מצב מצבר, שאר מידע רלוונטי כתלות בסוג רכב
             //not finish
         }
@@ -379,6 +388,8 @@ namespace Ex03.ConsoleUI
             Console.Write(@"Please enter the engine capacity in cc: must be Positiv number ");
             do
             {
+
+                //TODO try catch
                 engineCapacity = int.Parse(Console.ReadLine());
                 isValidEngineCapacity = Validation.CheckEngineCapacity(engineCapacity);
             }
@@ -405,6 +416,8 @@ namespace Ex03.ConsoleUI
 
             do
             {
+                //TODO TRY CATCH
+                //ADD TO THE PRINT THE MAXCAPACITY
                 currentEnergy = float.Parse(Console.ReadLine());
                 isValidCurrenEnergy = Validation.CheckCurrentEnergy(currentEnergy, MaxEnergy);
             }
@@ -533,7 +546,7 @@ namespace Ex03.ConsoleUI
                     break;
                 case eGarageMenu.DisplayVehicleInformation:
                     ShowVehicleInformation();
-                    //not finish
+                    //TODO not finish
                     break;
                 case eGarageMenu.Exit:
                     exitSystem();

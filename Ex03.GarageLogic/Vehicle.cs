@@ -78,9 +78,9 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void SetTireInfo( string i_ManufacturerName, float i_MaxAirPressure, float i_CurrentAirPressure)
+        public void SetTireInfo(string i_ManufacturerName, float i_MaxAirPressure, float i_CurrentAirPressure)
         {
-            foreach(Tires tire in m_Tire)
+            foreach (Tires tire in m_Tire)
             {
                 tire.ManufacturerName = i_ManufacturerName;
                 tire.MaxAirPressure = i_MaxAirPressure;
@@ -132,33 +132,22 @@ namespace Ex03.GarageLogic
                 return m_MaxTireAirPressure;
             }
         }
-        public void PrintCurr()
-        {
-            /*string vehicleInformationOutput = string.Format(
-                                                            @"Vehicle:
-                                                            --------------------------------
-                                                            License Number: {0}
-                                                            Model Name: {1},
-                                                            Current: {2},
-                                                            Energy Percentage Left: {3}%
-                                                            {4}",
-                                                            LicensingNumber,
-                                                            ModelName,
-                                                            CurrentEnergySource,
-                                                            EnergyPrecent,
-                                                            m_Tire[0].ToString());*/
-            Console.WriteLine("Vehicle");
-            Console.WriteLine("License" + LicensingNumber);
-            Console.WriteLine("Model" + ModelName);
-            Console.WriteLine("Current" + CurrentEnergySource);
-            Console.WriteLine("Energy Percentage Left:" + EnergyPrecent);
-            Tire.ToString();
-        }
+
         public override string ToString()
         {
-            
-            PrintCurr();
-            return " ";
+            string vehicleInformationOutput = string.Format(
+            @"Vehicle:
+            --------------------------------
+            License Number: {0}
+            Model Name: {1}
+            Energy Percentage Left: {2}%
+            {3}",
+            LicensingNumber,
+            ModelName,
+            EnergyPrecent,
+            Tire[0].ToString());
+
+            return vehicleInformationOutput;
         }
     }
 }

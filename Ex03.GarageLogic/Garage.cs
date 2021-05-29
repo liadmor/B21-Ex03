@@ -29,13 +29,13 @@ namespace Ex03.GarageLogic
             if (VehicleInTheGarage.ContainsKey(i_Vehicle.LicensingNumber))
             {
                 VehicleInTheGarage[i_Vehicle.LicensingNumber].VehicleStatus = OwnerInformation.eVehicleStatus.InRepaired;
-                inGarageMessage.Append("Vehicle number {0} is already in the system" + i_Vehicle.LicensingNumber);
+                inGarageMessage.AppendFormat("Vehicle number {0} is already in the system", i_Vehicle.LicensingNumber);
             }
             else
             {
                 OwnerInformation ownerInformationToInsert = new OwnerInformation(i_VehicleOwnerName, i_VehicleOwnerPhone, i_Vehicle);
                 VehicleInTheGarage.Add(i_Vehicle.LicensingNumber, ownerInformationToInsert);
-                inGarageMessage.Append("Vehicle number {0} was inserted into the garage" + i_Vehicle.LicensingNumber);
+                inGarageMessage.AppendFormat("Vehicle number {0} was inserted into the garage", i_Vehicle.LicensingNumber);
             }
 
             return inGarageMessage.ToString();
@@ -110,6 +110,8 @@ namespace Ex03.GarageLogic
 
         public string DisplayVehicleInformation(string i_licensingNumber)
         {
+
+            //return VehicleInTheGarage[i_licensingNumber].ToString();
             return VehicleInTheGarage[i_licensingNumber].ToString();
         }
 
