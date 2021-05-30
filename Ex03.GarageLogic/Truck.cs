@@ -50,10 +50,11 @@ namespace Ex03.GarageLogic
             string stringInformationTruck;
             
             stringInformationTruck = string.Format(
-                                                  @"This is Truck {0},
-                                                  Fuel Type: {1}
-                                                  Is Contain Dangerou Ssubstance: {2}
-                                                  Max Carrying Weight: {3}", base.ToString(), m_FuelType, m_IsContainDangerouSsubstance, m_MaxCarryingWeight);
+            @"This is Truck,
+            Fuel Type: {0}
+            Is Contain Dangerou Ssubstance: {1}
+            Max Carrying Weight: {2},
+            {3}", m_FuelType, m_IsContainDangerouSsubstance, m_MaxCarryingWeight, base.ToString());
             return stringInformationTruck;
         }
     }

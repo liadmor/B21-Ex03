@@ -50,10 +50,11 @@ namespace Ex03.GarageLogic
             string stringInformationFuelBasedMotorcycle;
 
             stringInformationFuelBasedMotorcycle = string.Format(
-                                                  @"This is Fuel Based Motorcycle {0},
-                                                  License Type: {1}
-                                                  Engine Capacity: {2}
-                                                  Fuel Type = {3}", base.ToString(), m_LicenseType, m_EngineCapacity, m_FuelType);
+            @"This is Fuel Based Motorcycle,
+            License Type: {0}
+            Engine Capacity: {1}
+            Fuel Type = {2}
+            {3}", m_LicenseType, m_EngineCapacity, m_FuelType, base.ToString());
             return stringInformationFuelBasedMotorcycle;
         }
     }

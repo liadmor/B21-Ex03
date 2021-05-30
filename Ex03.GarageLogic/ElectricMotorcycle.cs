@@ -48,9 +48,10 @@ namespace Ex03.GarageLogic
             string stringInformationElectricMotorcycle;
 
             stringInformationElectricMotorcycle = string.Format(
-                                                  @"This is electric Motorcycle {0},
-                                                  License Type: {1}
-                                                  Engine Capacity: {2}", base.ToString(), m_LicenseType, m_EngineCapacity);
+            @"This is electric Motorcycle
+            License Type: {0}
+            Engine Capacity: {1},
+            {2}", m_LicenseType, m_EngineCapacity, base.ToString());
             return stringInformationElectricMotorcycle;
         }
 

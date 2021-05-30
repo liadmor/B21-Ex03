@@ -94,7 +94,6 @@ namespace Ex03.GarageLogic
             foreach (Tires tire in VehicleInTheGarage[i_licensingNumber].Vehicle.Tire)
             {
                 tire.Inflatoin(tire.MaxAirPressure - tire.CurrentAirPressure);
-                Console.WriteLine(tire.CurrentAirPressure);
             }
         }
 
@@ -114,10 +113,8 @@ namespace Ex03.GarageLogic
         }
 
         public string DisplayVehicleInformation(string i_licensingNumber)
-        {
-
-            //return VehicleInTheGarage[i_licensingNumber].ToString();
-            return (VehicleInTheGarage[i_licensingNumber]).liadToString();
+        { 
+            return (VehicleInTheGarage[i_licensingNumber]).ToString();
         }
 
 
@@ -188,21 +185,22 @@ namespace Ex03.GarageLogic
                 Paid
             }
 
-            public string liadToString()
+            public override string ToString()
             {
                 string vehicleInformationOutput = string.Format(
-                                                                @"Owner:
-                                                                --------------------------------
-                                                                Name: {0}
-                                                                Phone-Number: {1}
-                                                                Status: {2}
-                                                                {3}",
-                                                                m_VehicleOwnerName,
-                                                                m_VehicleOwnerPhone,
-                                                                m_VehicleStatus,
-                                                               Vehicle.ToString());
+                @"{0}
+                Owner Name: {1}
+                Phone-Number: {2}
+                Status: {3}
+                ",
+                Vehicle.ToString(),
+                m_VehicleOwnerName,
+                m_VehicleOwnerPhone,
+                m_VehicleStatus);
+
                 return vehicleInformationOutput;
             }
+            
         }
     }
 }

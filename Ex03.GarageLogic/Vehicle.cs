@@ -82,13 +82,12 @@ namespace Ex03.GarageLogic
 
         public void SetTireInfo(string i_ManufacturerName, float i_MaxAirPressure, float i_CurrentAirPressure)
         {
-            if (i_MaxAirPressure >= i_CurrentAirPressure)
+            if ((i_MaxAirPressure >= i_CurrentAirPressure) && (i_CurrentAirPressure >= 0))
             {
-                foreach (Tires tire in m_Tire)
+                for (int i = 0; i <= m_NumberOfTires; i++)
                 {
-                    tire.ManufacturerName = i_ManufacturerName;
-                    tire.MaxAirPressure = i_MaxAirPressure;
-                    tire.CurrentAirPressure = i_CurrentAirPressure;
+                    Tires test = new Tires(i_ManufacturerName, i_MaxAirPressure, i_CurrentAirPressure);
+                    Tire.Add(test);
                 }
             }
             else
@@ -101,11 +100,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_EnergyPrecent;
-            }
-            set
-            {
-                m_EnergyPrecent = (m_CurrentEnergySource / m_MaxEnergySource) * 100;
+                return m_EnergyPrecent = (CurrentEnergySource / MaxEnergySource) * 100;
             }
         }
 
@@ -151,15 +146,17 @@ namespace Ex03.GarageLogic
             License Number: {0}
             Model Name: {1}
             Energy Percentage Left: {2}%
-            {3}",
-            m_LicensingNumber,
-            m_ModelName,
-            m_EnergyPrecent,
-            m_Tire[0].ToString());
+            Number of tires: {3},
+            {4}",
+            LicensingNumber,
+            ModelName,
+            EnergyPrecent,
+            m_NumberOfTires,
+            Tire[0].ToString());
 
             return vehicleInformationOutput;
         }
 
-        
+
     }
 }

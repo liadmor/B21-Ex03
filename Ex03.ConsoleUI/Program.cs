@@ -11,6 +11,17 @@ namespace Ex03.ConsoleUI
         public static void Main()
         {
             new UserInterface();
+            /*Ex03.GarageLogic.Vehicle liad = new GarageLogic.Vehicle(4, 30, 321);
+            //liad.ModelName = "vfd";
+            //liad.LicensingNumber = "vsv";
+            foreach (Ex03.GarageLogic.Tires tire in liad.Tire)
+            {
+                tire.ManufacturerName = "gil";
+                tire.MaxAirPressure = 11;
+                tire.CurrentAirPressure = 1.7f;
+            }
+            Console.WriteLine(liad.ToString());
+            Console.ReadLine();*/
         }
 
     }

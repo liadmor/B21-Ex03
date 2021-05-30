@@ -64,14 +64,13 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             string TireInformationOutput = string.Format(
-                                                            @"Tires:
-                                                            --------------------------------
-                                                            Manufacturer: {0}
-                                                            Current Air Pressure: {1}
-                                                            Max Air Pressure: {2}",
-                                                            m_ManufacturerName,
-                                                            m_CurrentAirPressure,
-                                                            m_MaxAirPressure);
+            @"Tires:
+            Manufacturer: {0}
+            Current Air Pressure: {1}
+            Max Air Pressure: {2}",
+            m_ManufacturerName,
+            m_CurrentAirPressure,
+            m_MaxAirPressure);
 
             return TireInformationOutput;
         }

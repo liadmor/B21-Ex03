@@ -68,8 +68,9 @@ namespace Ex03.GarageLogic
             string stringInformationFuelBaseVehicle;
 
             stringInformationFuelBaseVehicle = string.Format(
-                                                  @"this vehicle based on Fuel{0}
-                                                  the current fuel is: [{1}/{2}]", base.ToString(), m_CurrentEnergySource, m_VehichleMaxTank);
+            @"this vehicle based on Fuel
+            the current fuel is: [{0}/{1}]
+            {2}", m_CurrentEnergySource, m_VehichleMaxTank, base.ToString());
             return stringInformationFuelBaseVehicle;
         }
 

@@ -60,9 +60,10 @@ namespace Ex03.GarageLogic
             string stringInformationElectricBaseVehicle;
 
             stringInformationElectricBaseVehicle = string.Format(
-                                                  @"this vehicle based on Electric
-                                                  the current engin is: [{0}/{1}]
-                                                  {2}", m_CurrentEnergySource, m_MaxTimeOfEngine ,base.ToString());
+            @"this vehicle based on Electric
+            the current engin is: [{0}/{1}]
+            {2}", m_CurrentEnergySource, m_MaxTimeOfEngine ,base.ToString());
+
             return stringInformationElectricBaseVehicle;
         }
 

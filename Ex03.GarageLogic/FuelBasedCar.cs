@@ -48,10 +48,11 @@ namespace Ex03.GarageLogic
             string stringInformationFuelCar;
 
             stringInformationFuelCar = string.Format(
-                                                  @"This is Fuel base car {0},
-                                                  color: {1}
-                                                  number of doors: {2}
-                                                  Fuel Type: {3}", base.ToString(), m_color, m_numDoors, m_FuelType);
+            @"This is Fuel base car,
+            color: {0}
+            number of doors: {1}
+            Fuel Type: {2}
+             {3}", m_color, m_numDoors, m_FuelType, base.ToString());
             return stringInformationFuelCar;
         }
     }

@@ -47,9 +47,10 @@ namespace Ex03.GarageLogic
             string stringInformationElectricCar;
 
             stringInformationElectricCar = string.Format(
-                                                  @"This is electric car {0},
-                                                  color: {1}
-                                                  number of doors: {2}", base.ToString(), m_color, m_numDoors);
+            @"This is electric car,
+            color: {0}
+            number of doors: {1}
+            {2}", m_color, m_numDoors, base.ToString());
             return stringInformationElectricCar;
         }
     }
