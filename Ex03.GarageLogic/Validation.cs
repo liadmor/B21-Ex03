@@ -88,6 +88,7 @@ namespace Ex03.GarageLogic
             int selectedOption = -1;
             bool isValidInput = false;
 
+
             while (!isValidInput)
             {
                 string userSelection = Console.ReadLine();
@@ -135,47 +136,6 @@ namespace Ex03.GarageLogic
             }
 
             return true;
-        }
-
-        public static bool CheckDoorsNumber(int i_DoorsNumber)
-        {
-            bool isValidInput = true;
-            
-            if(i_DoorsNumber > 5)
-            {
-                Console.WriteLine("You have enter number bigger than you allow, please enter again:");
-                isValidInput = false;
-            }
-            if (i_DoorsNumber < 2)
-            {
-                Console.WriteLine("You have enter number smaller than you allow, please enter again:");
-                isValidInput = false;
-            }
-
-            return isValidInput;
-        }
-
-        public static bool CheckColorCar(String i_DoorsNumber)
-        {
-            bool isValidInput = true;
-            int parseInput;
-
-            try
-            {
-                parseInput =int.Parse(i_DoorsNumber);
-                if ((parseInput > 4) || (parseInput < 1))
-                {
-                    Console.WriteLine("You have enter number that does not have represention, please enter again:");
-                    isValidInput = false;
-                }
-            }
-            catch
-            {
-                Console.WriteLine("You didnt enter a invalid input, please enter again:");
-                isValidInput = false;
-            }
-
-            return isValidInput;
         }
 
         public static bool CheckAnsDangerus(string i_AnsDangerus)
